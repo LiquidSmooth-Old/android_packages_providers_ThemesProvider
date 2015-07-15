@@ -257,9 +257,6 @@ public class ThemesProvider extends ContentProvider {
             queryBuilder.appendWhere(MixnMatchColumns.COL_KEY + "=" + uri.getLastPathSegment());
             break;
         case COMPONENTS_PREVIEWS:
-            projection = ProviderUtils.modifyPreviewsProjection(projection);
-            selection = ProviderUtils.modifyPreviewsSelection(selection, projection);
-            selectionArgs = ProviderUtils.modifyPreviewsSelectionArgs(selectionArgs, projection);
             groupBy = PreviewColumns.THEME_ID + "," + PreviewColumns.COMPONENT_ID;
             queryBuilder.setTables(THEMES_PREVIEWS_INNER_JOIN);
             break;
