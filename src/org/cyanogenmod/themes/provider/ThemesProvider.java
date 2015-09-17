@@ -45,6 +45,7 @@ import android.util.Log;
 import org.cyanogenmod.themes.provider.ThemesOpenHelper.MixnMatchTable;
 import org.cyanogenmod.themes.provider.ThemesOpenHelper.PreviewsTable;
 import org.cyanogenmod.themes.provider.ThemesOpenHelper.ThemesTable;
+import org.cyanogenmod.themes.provider.util.PreviewUtils;
 import org.cyanogenmod.themes.provider.util.ProviderUtils;
 
 import java.io.File;
@@ -53,6 +54,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static android.content.res.ThemeConfig.SYSTEM_DEFAULT;
@@ -128,7 +130,7 @@ public class ThemesProvider extends ContentProvider {
                 String pkgName = c.getString(idx);
                 String filesDir = getContext().getFilesDir().getAbsolutePath();
                 String themePreviewsDir = filesDir + File.separator +
-                        PreviewGenerationService.PREVIEWS_DIR + File.separator + pkgName;
+                        PreviewUtils.PREVIEWS_DIR + File.separator + pkgName;
                 PreviewGenerationService.clearThemePreviewsDir(themePreviewsDir);
             }
             c.close();
@@ -373,7 +375,7 @@ public class ThemesProvider extends ContentProvider {
                     if (id >= 0) {
                         if (ThemesColumns.MODIFIES_STATUS_BAR.equals(component)) {
                             for (String previewKey : PreviewsTable.STATUS_BAR_PREVIEW_KEYS) {
-                                sb.append(delimeter).append(String.format(
+                                sb.append(delimeter).append(String.format(Locale.US,
                                         "(SELECT %s AS %s FROM previews WHERE %s=%d AND %s='%s')",
                                         PreviewColumns.COL_VALUE, previewKey,
                                         PreviewColumns.THEME_ID, id, PreviewColumns.COL_KEY,
@@ -382,7 +384,7 @@ public class ThemesProvider extends ContentProvider {
                             }
                         } else if (ThemesColumns.MODIFIES_ICONS.equals(component)) {
                             for (String previewKey : PreviewsTable.ICON_PREVIEW_KEYS) {
-                                sb.append(delimeter).append(String.format(
+                                sb.append(delimeter).append(String.format(Locale.US,
                                         "(SELECT %s AS %s FROM previews WHERE %s=%d AND %s='%s')",
                                         PreviewColumns.COL_VALUE, previewKey,
                                         PreviewColumns.THEME_ID, id, PreviewColumns.COL_KEY,
@@ -391,14 +393,14 @@ public class ThemesProvider extends ContentProvider {
                             }
                         } else if (ThemesColumns.MODIFIES_LAUNCHER.equals(component)) {
                             String previewKey = PreviewColumns.WALLPAPER_PREVIEW;
-                            sb.append(delimeter).append(String.format(
+                            sb.append(delimeter).append(String.format(Locale.US,
                                     "(SELECT %s AS %s FROM previews WHERE %s=%d AND %s='%s')",
                                     PreviewColumns.COL_VALUE, previewKey, PreviewColumns.THEME_ID,
                                     id, PreviewColumns.COL_KEY, previewKey));
                             delimeter = ",";
                         } else if (ThemesColumns.MODIFIES_NAVIGATION_BAR.equals(component)) {
                             for (String previewKey : PreviewsTable.NAVIGATION_BAR_PREVIEW_KEYS) {
-                                sb.append(delimeter).append(String.format(
+                                sb.append(delimeter).append(String.format(Locale.US,
                                         "(SELECT %s AS %s FROM previews WHERE %s=%d AND %s='%s')",
                                         PreviewColumns.COL_VALUE, previewKey,
                                         PreviewColumns.THEME_ID, id, PreviewColumns.COL_KEY,
@@ -407,7 +409,7 @@ public class ThemesProvider extends ContentProvider {
                             }
                         } else if (ThemesColumns.MODIFIES_OVERLAYS.equals(component)) {
                             String previewKey = PreviewColumns.STYLE_PREVIEW;
-                            sb.append(delimeter).append(String.format(
+                            sb.append(delimeter).append(String.format(Locale.US,
                                     "(SELECT %s AS %s FROM previews WHERE %s=%d AND %s='%s')",
                                     PreviewColumns.COL_VALUE, previewKey, PreviewColumns.THEME_ID,
                                     id, PreviewColumns.COL_KEY, previewKey));

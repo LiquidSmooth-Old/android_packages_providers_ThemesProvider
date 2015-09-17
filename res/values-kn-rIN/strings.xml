@@ -16,7 +16,7 @@
      limitations under the License.
 -->
 <resources>
-  <string name="app_name">تم‌ها</string>
-  <string name="unknown_app_name">نامشخص</string>
-  <string name="controls_preview_button_text">عادی</string>
+  <string name="app_name">ಥೀಮ್ಸ್ ಪೂರೈಕೆದಾರ</string>
+  <string name="unknown_app_name">ಅಜ್ಞಾತ</string>
+  <string name="controls_preview_button_text">ಸಹಜ</string>
 </resources>
